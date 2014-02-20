@@ -1,10 +1,41 @@
 package com.mentalmachines.weather;
-public class ForecastResponse {
 
+import java.util.ArrayList;
+
+public class ForecastResponse {
+	String cod;
+	Double message;
+	public class City{
+		Integer id;
+		String name;
+		Coordinates coord;
+		String country;
+		Integer population;
+	}
+
+	Integer cnt;
+	ArrayList<ForecastListItem> list = new ArrayList<ForecastListItem>();
+			
+	public class ForecastListItem{
+		int dt;
+		Main main;
+		ArrayList<Weather> weather;
+		Clouds clouds;
+		Wind wind;
+		Sys sys;
+		String dt_txt;
+	}
+	
 	private class Coordinates{
 		Double lon, lat;
 	} 
-	Coordinates coord;
+	
+	public class Main{
+		Double temp, temp_min, temp_max, 
+			pressure, sea_level, grnd_level;
+		Integer humidity;
+		Double temp_kf;
+	}
 	
 	private class Sys{
 		Double message;
@@ -20,16 +51,6 @@ public class ForecastResponse {
 		String description;
 		String icon;
 	}
-	Weather weather;
-	
-	String base;
-	
-	public class Main{
-		Double temp;
-		Integer pressure;
-		Integer humidity;
-		Double temp_min, temp_max;
-	}
 	
 	public class Wind {
 		Double speed;
@@ -43,9 +64,4 @@ public class ForecastResponse {
 	private class Clouds{
 		Integer all;
 	}
-	
-	Integer dt;
-	Integer id;
-	String name;
-	Integer cod;
-	}
+}
