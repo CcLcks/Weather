@@ -2,6 +2,7 @@ package com.mentalmachines.weather.Fragments;
 
 import java.util.concurrent.ExecutionException;
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 
 import com.google.gson.Gson;
@@ -37,8 +38,10 @@ public class CurrentFragment extends Fragment{
 	}
 
 	private String getURL(String location){
-		String currentWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + location;
-		return currentWeatherURL;
+		Uri.Builder builder = new Uri.Builder();
+		builder.scheme("https").authority("api.openweathermap.org").appendPath("data").appendPath("2.5").appendPath("weather")
+			.appendQueryParameter("q", location).appendQueryParameter("mode", "json");
+		return builder.build().toString();
 	}
 	
 	private void displayData(){

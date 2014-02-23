@@ -2,20 +2,30 @@ package com.mentalmachines.weather.Fragments;
 
 import java.util.concurrent.ExecutionException;
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 
 import com.google.gson.Gson;
-import com.mentalmachines.weather.CurrentResponse;
 import com.mentalmachines.weather.FetchJSONTask;
 import com.mentalmachines.weather.ForecastResponse;
+import com.mentalmachines.weather.LocationTask;
 
 public class ForecastFragment extends Fragment{
-
-	ForecastResponse forecastWeatherResponse = new ForecastResponse();
+	ForecastResponse forecastResponse = new ForecastResponse();
+	String location; 
 	
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
+		try {
+			location = new LocationTask().execute(null, "", "").get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JsonToObject();
 		displayData();
 		super.onStart();
@@ -35,12 +45,14 @@ public class ForecastFragment extends Fragment{
 			e.printStackTrace();
 		}
 		
-		forecastWeatherResponse = gson.fromJson(jsonString, ForecastResponse.class);
+		forecastResponse = gson.fromJson(jsonString, ForecastResponse.class);
 	}
 
 	private String getURL(String location){
-		String currentWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + location;
-		return currentWeatherURL;
+		Uri.Builder builder = new Uri.Builder();
+		builder.scheme("https").authority("api.openweathermap.org").appendPath("data").appendPath("2.5").appendPath("forecast")
+			.appendQueryParameter("q", location).appendQueryParameter("mode", "json");
+		return builder.build().toString();
 	}
 	
 	private void displayData(){
