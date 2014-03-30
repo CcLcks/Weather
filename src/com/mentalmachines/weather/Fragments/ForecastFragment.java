@@ -2,6 +2,7 @@ package com.mentalmachines.weather.Fragments;
 
 import java.util.concurrent.ExecutionException;
 
+
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 
@@ -18,7 +19,7 @@ public class ForecastFragment extends Fragment{
 	public void onStart() {
 		// TODO Auto-generated method stub
 		try {
-			location = new LocationTask().execute(null, "", "").get();
+			location = (String) new LocationTask().execute(null, "", "").get();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

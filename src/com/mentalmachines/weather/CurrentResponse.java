@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CurrentResponse {
 	Coordinates coord;
-	Sys sys;
+	public Sys sys;
 	// Weather weather;
 	ArrayList<Weather> weather;
 	String base;
@@ -18,11 +18,11 @@ public class CurrentResponse {
 		Double lon, lat;
 	} 
 	
-	
-	private class Sys{
+	public class Sys{
 		Double message;
 		String country;
-		String sunrise, sunset; 
+		public String sunrise;
+		String sunset; 
 	}
 
 	private class Weather{
