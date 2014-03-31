@@ -23,6 +23,7 @@ public class CurrentFragment extends Fragment{
 		tempMaxIdTextView, tempMaxTextView, windIdTextView, windMaxTextView, 
 		rainIdTextView, rainTextView, cloudsIdTextView, cloudsTextView;
 	
+	TextView titleTextView;  
 	CurrentResponse current= new CurrentResponse();
 	
 	@Override
@@ -35,9 +36,10 @@ public class CurrentFragment extends Fragment{
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-
-		
         View view = inflater.inflate(R.layout.fragment_current_weather, container, false);
+        
+        titleTextView = (TextView) view.findViewById(R.id.titleTextView);
+        
 		sunriseIdTextView = (TextView) view.findViewById(R.id.sunriseIdTextView);
 		sunriseTextView = (TextView) view.findViewById(R.id.sunriseTextView);
 		sunsetIdTextView = (TextView) view.findViewById(R.id.sunsetIdTextView);
@@ -66,7 +68,7 @@ public class CurrentFragment extends Fragment{
 		String jsonString = null;
 		
 		try {
-			jsonString = new FetchJSONTask().execute(getURL("London, UK"), "", "").get();
+			jsonString = new FetchJSONTask().execute(getURL("London,uk"), "", "").get();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,14 +82,24 @@ public class CurrentFragment extends Fragment{
 
 	private String getURL(String location){
 		Uri.Builder builder = new Uri.Builder();
-		builder.scheme("https").authority("api.openweathermap.org").appendPath("data").appendPath("2.5").appendPath("weather")
+		String URL;
+		builder.scheme("http").authority("api.openweathermap.org").appendPath("data").appendPath("2.5").appendPath("weather")
 			.appendQueryParameter("q", location).appendQueryParameter("mode", "json");
-		return builder.build().toString();
+		URL = builder.build().toString();
+		return URL;
 	}
 	
 	public void displayData(){
 		sunriseTextView.setText(current.sys.sunrise);
-
+		sunsetTextView.setText(current.sys.sunset);
+		tempTextView.setText(String.valueOf(current.main.temp));
+		// pressureTextView.setText(current.main.pressure);
+		// humidityTextView.setText(current.main.humidity);
+		tempMinTextView.setText(String.valueOf(current.main.temp_min));
+		tempMaxTextView.setText(String.valueOf(current.main.temp_max));
+		windMaxTextView.setText(String.valueOf(current.wind.speed));
+		rainTextView.setText(String.valueOf(current.rain.threeh));
+		// cloudsTextView.setText(current.clouds.all);
 	}  
 
 }

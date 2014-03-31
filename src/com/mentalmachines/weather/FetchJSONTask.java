@@ -34,7 +34,7 @@ public class FetchJSONTask extends AsyncTask<String, String, String> {
 			connection = (HttpURLConnection)serverAddress.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setDoOutput(true);
-			connection.setReadTimeout(10000);
+			connection.setReadTimeout(100000);
 
 			connection.connect();
 

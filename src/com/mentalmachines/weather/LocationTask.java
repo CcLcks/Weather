@@ -6,8 +6,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.json.JSONException;
-
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
