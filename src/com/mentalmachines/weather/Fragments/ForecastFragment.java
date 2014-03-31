@@ -4,12 +4,18 @@ import java.util.concurrent.ExecutionException;
 
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.mentalmachines.weather.FetchJSONTask;
 import com.mentalmachines.weather.ForecastResponse;
 import com.mentalmachines.weather.LocationTask;
+import com.mentalmachines.weather.R;
 
 public class ForecastFragment extends Fragment{
 	ForecastResponse forecastResponse = new ForecastResponse();
@@ -30,6 +36,12 @@ public class ForecastFragment extends Fragment{
 		JsonToObject();
 		displayData();
 		super.onStart();
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.fragment_forecast_weather, container, false);
+        return view;
 	}
 	
 	private void JsonToObject(){

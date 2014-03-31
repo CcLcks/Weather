@@ -2,7 +2,6 @@ package com.mentalmachines.weather.Fragments;
 
 import java.util.concurrent.ExecutionException;
 
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -93,13 +92,12 @@ public class CurrentFragment extends Fragment{
 		sunriseTextView.setText(current.sys.sunrise);
 		sunsetTextView.setText(current.sys.sunset);
 		tempTextView.setText(String.valueOf(current.main.temp));
-		// pressureTextView.setText(current.main.pressure);
-		// humidityTextView.setText(current.main.humidity);
+		pressureTextView.setText(Integer.toString(current.main.pressure));
+		humidityTextView.setText(Integer.toString(current.main.humidity));
 		tempMinTextView.setText(String.valueOf(current.main.temp_min));
 		tempMaxTextView.setText(String.valueOf(current.main.temp_max));
 		windMaxTextView.setText(String.valueOf(current.wind.speed));
 		rainTextView.setText(String.valueOf(current.rain.threeh));
-		// cloudsTextView.setText(current.clouds.all);
-	}  
-
+		cloudsTextView.setText(Integer.toString(current.clouds.all));
+	} 
 }
